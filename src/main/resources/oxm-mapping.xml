@@ -1,0 +1,33 @@
+<mapping>
+
+    <class name="com.drpotato.filtr.domain.Profanity">
+    
+    	<map-to xml="profanities"/>
+    
+    	<field name="id" type="int">
+    		<bind-xml name="id" node="element"/>
+    	</field>
+    	<field name="name" type="string">
+    		<bind-xml name="name" node="element"/>
+    	</field>
+        <field name="wordLists" type="com.drpotato.filtr.domain.WordList" collection="set">
+            <bind-xml name="wordLists"/>
+        </field>    
+    </class>
+
+    <class name="com.drpotato.filtr.domain.WordList" identity="id">
+    
+        <map-to xml="wordLists" />
+        
+    	<field name="id" type="int">
+    		<bind-xml name="id" node="element"/>
+    	</field>
+    	<field name="name" type="string">
+    		<bind-xml name="name" node="element"/>
+    	</field>
+        <field name="profanities" type="com.drpotato.filtr.domain.Profanity" collection="set">
+            <bind-xml name="profanities"/>
+        </field>                 
+    
+    </class>     
+</mapping>
