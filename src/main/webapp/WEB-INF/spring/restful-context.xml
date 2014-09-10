@@ -10,11 +10,6 @@
 		<mvc:message-converters>
 			<bean
 				class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
-			<bean
-				class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-				<property name="marshaller" ref="castorMarshaller" />
-				<property name="unmarshaller" ref="castorMarshaller" />
-			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
