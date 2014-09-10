@@ -1,12 +1,12 @@
 package com.drpotato.filtr.service;
 
-import java.util.List;
+import java.util.Set;
 
 import com.drpotato.filtr.domain.Profanity;
 
 public interface ProfanityService {
 
-	public List<Profanity> findAll();
+	public Set<Profanity> findAll();
 
 	public Profanity findById(Integer id);
 

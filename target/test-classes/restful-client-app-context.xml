@@ -14,8 +14,7 @@
                         <list>
                             <bean class="org.springframework.http.MediaType">
                                 <constructor-arg index="0" value="application"/>
-                                <constructor-arg index="1" value="xml"/>
-                                <constructor-arg index="2" value="json"/>
+                                <constructor-arg index="1" value="json"/>
                             </bean>
                         </list>
                     </property>
