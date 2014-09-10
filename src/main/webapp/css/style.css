@@ -1,0 +1,10 @@
+body {
+	padding-top: 60px;
+}
+
+.no-boarder {
+	border: 0px;
+	box-shadow: none;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

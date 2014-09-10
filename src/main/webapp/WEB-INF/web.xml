@@ -27,6 +27,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
 		
 	<!-- Ensure that the servlet executes incoming requests that match the pattern "/*". This means
 	     that if the application is hosted within a Web container at path "Contact", and if the 
@@ -35,6 +36,7 @@
 	     e.g http://localhost:8080/Contact/contacts.   -->
 	<servlet-mapping>
 		<servlet-name>profanityService</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
+	
 </web-app>
