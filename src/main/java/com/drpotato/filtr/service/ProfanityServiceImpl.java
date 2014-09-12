@@ -1,5 +1,6 @@
 package com.drpotato.filtr.service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,16 +14,17 @@ import com.drpotato.filtr.domain.Profanity;
 public class ProfanityServiceImpl implements ProfanityService {
 
 	private Map<Integer, Profanity> indexedProfanities;
+	private int index;
 
 	public ProfanityServiceImpl() {
 		Profanity[] profanities = new Profanity[] { new Profanity("fuck"),
 				new Profanity("shit"), new Profanity("balls") };
 
 		indexedProfanities = new HashMap<Integer, Profanity>();
-		for (int i = 0; i < profanities.length; i++) {
-			Integer id = new Integer(i + 1);
-			profanities[i].setId(id);
-			indexedProfanities.put(id, profanities[i]);
+		for (index = 0; index < profanities.length; index++) {
+			Integer id = new Integer(index + 1);
+			profanities[index].setId(id);
+			indexedProfanities.put(id, profanities[index]);
 		}
 
 	}
@@ -42,15 +44,15 @@ public class ProfanityServiceImpl implements ProfanityService {
 	@Override
 	public Profanity save(Profanity profanity) {
 		// TODO Auto-generated method stub
-		indexedProfanities.put(indexedProfanities.size() + 1, profanity);
+		this.index++;
+		indexedProfanities.put(index, profanity);
 		profanity.setId(indexedProfanities.size());
 		return profanity;
 	}
 
 	@Override
 	public boolean delete(Profanity profanity) {
-		indexedProfanities.remove(profanity);
+		indexedProfanities.remove(profanity.getId());
 		return true;
 	}
-
 }
