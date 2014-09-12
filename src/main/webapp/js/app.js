@@ -3,9 +3,9 @@
 	
 	filtr.controller('ProfanityController', function($scope, $http) {
 		
-		$scope.profanities = []
+		$scope.profanities = [];
 		
-		this.newProfanity = {}
+		$scope.newProfanity = {};
 		
 		$http.get("/filtr/api/profanity/")
 		.success(function(data, status, headers, config) {
@@ -16,9 +16,18 @@
 			console.log("Oops...");
 		});
 		
-		this.addProfanity = function(profanity) {
-			$scope.profanities.push(profanity)
-			$scope.NewProfanity = {}
+		$scope.addProfanity = function(profanity) {
+			
+			$http.post("/filtr/api/profanity/", profanity)
+			.success(function(data, status, headers, config) {
+				console.log(data);
+			})
+			.error(function(data, status, headers, config) {
+				console.log(data);
+			});
+			
+			$scope.profanities.push(profanity);
+			$scope.newProfanity = {};
 		};
 		
 	});

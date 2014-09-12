@@ -26,9 +26,11 @@
 						<li class="list-group-item"
 							ng-repeat="profanity in profanities | orderBy:'id'">{{profanity.name}}</li>
 						<li class="list-group-item">
-							<form ng-submit="ProfanityController.addProfanity(newProfanity)" role="form" class="test">
+							<form role="form" class="test">
 							    <input ng-model="newProfanity.name" type="text" class="form-control no-border" placeholder="New Profanity">
+							    <button ng-click="addProfanity(newProfanity)" class="btn">Add</button>
 							</form>
+							<pre>form = {{newProfanity | json}}</pre>
 						</li>
 					</ul>
 				</div>
