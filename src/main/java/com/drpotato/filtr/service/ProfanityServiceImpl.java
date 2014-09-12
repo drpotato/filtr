@@ -49,8 +49,8 @@ public class ProfanityServiceImpl implements ProfanityService {
 
 	@Override
 	public boolean delete(Profanity profanity) {
-		// TODO Auto-generated method stub
-		return false;
+		Profanity deletedProfanity = indexedProfanities.remove(profanity);
+		return true;
 	}
 
 }

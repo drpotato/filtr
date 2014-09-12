@@ -14,7 +14,6 @@ public class ProfanityDaoImpl implements ProfanityDao {
 
 	private SessionFactory sessionFactory;
 
-	@Resource
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		sessionFactory = sessionFactory;
 	}

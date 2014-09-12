@@ -2,9 +2,15 @@ body {
 	padding-top: 60px;
 }
 
-.no-boarder {
+.no-border {
 	border: 0px;
 	box-shadow: none;
+}
+
+.test::before {
+	float:left;
+	display:inline-block;
+	content: "\2b";
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
