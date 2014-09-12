@@ -45,17 +45,16 @@ public class ProfanityController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public Profanity create(@RequestBody Profanity profanity,
-			@PathVariable Integer id) {
+	@RequestMapping(value = "/", method = RequestMethod.PUT)
+	public Profanity update(@RequestBody Profanity profanity) {
 		Profanity newProfanity = profanityService.save(profanity);
 		return newProfanity;
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void create(@PathVariable Integer id) {
-		Profanity profanity = profanityService.findById(id);
+	@RequestMapping(value = "/", method = RequestMethod.DELETE)
+	public Profanity remove(@RequestBody Profanity profanity) {
 		profanityService.delete(profanity);
+		return profanity;
 	}
 }

@@ -49,7 +49,7 @@ public class ProfanityServiceImpl implements ProfanityService {
 
 	@Override
 	public boolean delete(Profanity profanity) {
-		Profanity deletedProfanity = indexedProfanities.remove(profanity);
+		indexedProfanities.remove(profanity);
 		return true;
 	}
 

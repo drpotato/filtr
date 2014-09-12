@@ -7,10 +7,4 @@ body {
 	box-shadow: none;
 }
 
-.test::before {
-	float:left;
-	display:inline-block;
-	content: "\2b";
-}
-
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

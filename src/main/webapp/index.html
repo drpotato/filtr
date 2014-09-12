@@ -24,13 +24,12 @@
 				<div class="col-md-8">
 					<ul class="list-group">
 						<li class="list-group-item"
-							ng-repeat="profanity in profanities | orderBy:'id'">{{profanity.name}}</li>
+							ng-repeat="profanity in profanities | orderBy:'id'">{{profanity.name}}<button ng-click="delete(profanity)" class="btn glyphicon glyphicon-remove"></button></li>
 						<li class="list-group-item">
-							<form role="form" class="test">
+							<form role="form">
+								<button ng-click="add(newProfanity)" class="btn glyphicon glyphicon-plus"></button>
 							    <input ng-model="newProfanity.name" type="text" class="form-control no-border" placeholder="New Profanity">
-							    <button ng-click="addProfanity(newProfanity)" class="btn">Add</button>
 							</form>
-							<pre>form = {{newProfanity | json}}</pre>
 						</li>
 					</ul>
 				</div>
