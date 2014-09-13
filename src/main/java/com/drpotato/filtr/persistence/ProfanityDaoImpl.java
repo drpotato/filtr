@@ -26,27 +26,29 @@ public class ProfanityDaoImpl implements ProfanityDao {
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public Set<Profanity> findAll() {
+
 		return new HashSet<Profanity>(sessionFactory.getCurrentSession()
-				.createQuery("from com.drpotato.filtr.domain.Profanity p")
-				.list());
+				.createQuery("FROM Profanity p").list());
 	}
 
 	@Override
-	public Profanity findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Profanity findById(Integer id) {
+		return (Profanity) sessionFactory
+				.getCurrentSession()
+				.createQuery(
+						"SELECT distinct p FROM Profanity p WHERE p.id=:id")
+				.setParameter("id", id).uniqueResult();
 	}
 
 	@Override
 	public Profanity save(Profanity profanity) {
-		// TODO Auto-generated method stub
-		return null;
+		sessionFactory.getCurrentSession().saveOrUpdate(profanity);
+		return profanity;
 	}
 
 	@Override
 	public void delete(Profanity profanity) {
-		// TODO Auto-generated method stub
-
+		sessionFactory.getCurrentSession().delete(profanity);
 	}
 
 }

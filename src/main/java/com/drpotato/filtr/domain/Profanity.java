@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -17,15 +18,17 @@ import javax.persistence.Table;
 @Table(name = "profanity")
 public class Profanity implements Serializable {
 
+	private static final long serialVersionUID = -4659364195861965720L;
+
 	@Id
-	@Column(name = "profanity_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = IDENTITY)
 	private int id;
 
 	@Column(name = "name")
 	private String name;
 
-	@ManyToMany(mappedBy = "profanities")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "profanities")
 	private Set<WordList> wordLists = new HashSet<WordList>();
 
 	public Profanity() {
@@ -54,6 +57,10 @@ public class Profanity implements Serializable {
 
 	public Set<WordList> getWordLists() {
 		return wordLists;
+	}
+
+	public void setWordLists(Set<WordList> wordLists) {
+		this.wordLists = wordLists;
 	}
 
 	public void addWordList(WordList wordList) {

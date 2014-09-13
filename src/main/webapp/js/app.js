@@ -28,6 +28,9 @@
 			})
 			.error(function(data, status, headers, config) {
 				console.log(data);
+				console.log(status);
+				console.log(headers);
+				console.log(config);	
 			});
 			
 		};

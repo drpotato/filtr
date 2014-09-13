@@ -33,7 +33,6 @@ public class ProfanityController {
 	public Profanity create(@RequestBody Profanity profanity,
 			HttpServletResponse response) {
 		Profanity newProfanity = profanityService.save(profanity);
-		response.setHeader("Location", "/profanities/" + profanity.getId());
 		return newProfanity;
 	}
 

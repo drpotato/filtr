@@ -10,7 +10,7 @@ public interface ProfanityDao {
 	public Set<Profanity> findAll();
 
 	// Find a profanity with details by id
-	public Profanity findById(Long id);
+	public Profanity findById(Integer id);
 
 	// Insert or update a profanity
 	public Profanity save(Profanity profanity);

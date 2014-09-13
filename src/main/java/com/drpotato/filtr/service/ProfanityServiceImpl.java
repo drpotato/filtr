@@ -1,8 +1,5 @@
 package com.drpotato.filtr.service;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +11,8 @@ import com.drpotato.filtr.persistence.ProfanityDao;
 @Service("profanityService")
 public class ProfanityServiceImpl implements ProfanityService {
 
-	private Map<Integer, Profanity> indexedProfanities;
-	private int index;
-
 	@Autowired
 	private ProfanityDao profanityDao;
-
-	public ProfanityServiceImpl() {
-		Profanity[] profanities = new Profanity[] { new Profanity("fuck"),
-				new Profanity("shit"), new Profanity("balls") };
-
-		indexedProfanities = new HashMap<Integer, Profanity>();
-		for (index = 0; index < profanities.length; index++) {
-			Integer id = new Integer(index + 1);
-			profanities[index].setId(id);
-			indexedProfanities.put(id, profanities[index]);
-		}
-
-	}
 
 	@Override
 	public Set<Profanity> findAll() {
@@ -40,21 +21,18 @@ public class ProfanityServiceImpl implements ProfanityService {
 
 	@Override
 	public Profanity findById(Integer id) {
-		return indexedProfanities.get(id);
+		return profanityDao.findById(id);
 	}
 
 	@Override
 	public Profanity save(Profanity profanity) {
-		// TODO Auto-generated method stub
-		this.index++;
-		indexedProfanities.put(index, profanity);
-		profanity.setId(indexedProfanities.size());
-		return profanity;
+		Profanity newProfanity = profanityDao.save(profanity);
+		return newProfanity;
 	}
 
 	@Override
 	public boolean delete(Profanity profanity) {
-		indexedProfanities.remove(profanity.getId());
-		return true;
+		profanityDao.delete(profanity);
+		return true; // TODO: Get this to return something meaningful.
 	}
 }
