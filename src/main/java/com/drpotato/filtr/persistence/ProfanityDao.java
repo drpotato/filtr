@@ -1,13 +1,13 @@
 package com.drpotato.filtr.persistence;
 
-import java.util.List;
+import java.util.Set;
 
 import com.drpotato.filtr.domain.Profanity;
 
 public interface ProfanityDao {
 
 	// Find all profanities
-	public List<Profanity> findAll();
+	public Set<Profanity> findAll();
 
 	// Find a profanity with details by id
 	public Profanity findById(Long id);

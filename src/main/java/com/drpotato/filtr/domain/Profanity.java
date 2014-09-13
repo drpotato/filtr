@@ -17,8 +17,15 @@ import javax.persistence.Table;
 @Table(name = "profanity")
 public class Profanity implements Serializable {
 
+	@Id
+	@Column(name = "profanity_id")
+	@GeneratedValue(strategy = IDENTITY)
 	private int id;
+
+	@Column(name = "name")
 	private String name;
+
+	@ManyToMany(mappedBy = "profanities")
 	private Set<WordList> wordLists = new HashSet<WordList>();
 
 	public Profanity() {
@@ -29,9 +36,6 @@ public class Profanity implements Serializable {
 		this.name = name;
 	}
 
-	@Id
-	@Column(name = "profanity_id")
-	@GeneratedValue(strategy = IDENTITY)
 	public int getId() {
 		return id;
 	}
@@ -40,7 +44,6 @@ public class Profanity implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -49,7 +52,6 @@ public class Profanity implements Serializable {
 		this.name = name;
 	}
 
-	@ManyToMany(mappedBy = "profanities")
 	public Set<WordList> getWordLists() {
 		return wordLists;
 	}

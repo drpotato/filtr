@@ -1,13 +1,13 @@
 package com.drpotato.filtr.persistence;
 
-import java.util.List;
+import java.util.Set;
 
 import com.drpotato.filtr.domain.WordList;
 
 public interface WordListDao {
 
 	// Find all word lists
-	public List<WordList> findAll();
+	public Set<WordList> findAll();
 
 	// Find a word list with details by id
 	public WordList findById(Long id);

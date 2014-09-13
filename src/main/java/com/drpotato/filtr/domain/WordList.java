@@ -1,5 +1,7 @@
 package com.drpotato.filtr.domain;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,8 +20,16 @@ import javax.persistence.Table;
 @Table(name = "word_list")
 public class WordList implements Serializable {
 
+	@Id
+	@Column(name = "word_list_id")
+	@GeneratedValue(strategy = IDENTITY)
 	private int id;
+
+	@Column(name = "name")
 	private String name;
+
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "profanity_word_list", joinColumns = { @JoinColumn(name = "word_list_id") }, inverseJoinColumns = { @JoinColumn(name = "profanity_id") })
 	private Set<Profanity> profanities = new HashSet<Profanity>();
 
 	public WordList() {
@@ -29,9 +39,6 @@ public class WordList implements Serializable {
 		this.name = name;
 	}
 
-	@Id
-	@Column(name = "word_list_id")
-	@GeneratedValue
 	public int getId() {
 		return this.id;
 	}
@@ -40,7 +47,6 @@ public class WordList implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "name")
 	public String getName() {
 		return this.name;
 	}
@@ -49,8 +55,6 @@ public class WordList implements Serializable {
 		this.name = name;
 	}
 
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "profanity_word_list", joinColumns = { @JoinColumn(name = "word_list_id") }, inverseJoinColumns = { @JoinColumn(name = "profanity_id") })
 	public Set<Profanity> getProfanities() {
 		return this.profanities;
 	}
