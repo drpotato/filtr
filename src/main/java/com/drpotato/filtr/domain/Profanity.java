@@ -14,10 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "profanity")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Profanity implements Serializable {
 
 	private static final long serialVersionUID = -4659364195861965720L;
@@ -30,7 +32,6 @@ public class Profanity implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@JsonBackReference
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "profanities")
 	private Set<WordList> wordLists = new HashSet<WordList>();
 

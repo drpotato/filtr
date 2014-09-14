@@ -16,10 +16,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "word_list")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class WordList implements Serializable {
 
 	@Id
@@ -30,7 +33,6 @@ public class WordList implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@JsonManagedReference
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "profanity_word_list", joinColumns = { @JoinColumn(name = "word_list_id") }, inverseJoinColumns = { @JoinColumn(name = "profanity_id") })
 	private Set<Profanity> profanities = new HashSet<Profanity>();
