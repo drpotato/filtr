@@ -10,7 +10,7 @@ public interface WordListDao {
 	public Set<WordList> findAll();
 
 	// Find a word list with details by id
-	public WordList findById(Long id);
+	public WordList findById(Integer id);
 
 	// Insert or update a word list
 	public WordList save(WordList wordList);

@@ -36,7 +36,7 @@ public class ProfanityDaoImpl implements ProfanityDao {
 		return (Profanity) sessionFactory
 				.getCurrentSession()
 				.createQuery(
-						"SELECT distinct p FROM Profanity p WHERE p.id=:id")
+						"SELECT DISTINCT p FROM Profanity p WHERE p.id=:id")
 				.setParameter("id", id).uniqueResult();
 	}
 

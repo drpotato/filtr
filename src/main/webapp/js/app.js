@@ -1,30 +1,54 @@
 (function() {
 	var filtr = angular.module('filtr', ['ui.bootstrap']);
 	
-	filtr.controller('ProfanityController', function($scope, $http) {
+	filtr.controller('AppController', function($scope, $http) {
 		
-		$scope.profanities = [];
+		$scope.activeList = 0;
+		
+		$scope.allProfanities = [];
+		$scope.wordLists = [];
 		
 		$scope.newProfanity = {};
+		$scope.newList = {};
+		
+		$http.get("/filtr/api/word_list/")
+		.success(function(data, status, headers, config) {
+			$scope.wordLists = data;
+			if ($scope.wordLists.length > 0) {
+				$scope.activeList = 1;
+			}
+		})
+		.error(function(data, status, headers, config) {
+				console.log(data);
+				console.log(status);
+				console.log(headers);
+				console.log(config);	
+			});
 		
 		$http.get("/filtr/api/profanity/")
 		.success(function(data, status, headers, config) {
-			$scope.profanities = data;
+			$scope.allProfanities = data;
 		})
 		.error(function(data, status, headers, config) {
-			console.log("Oops...");
-		});
+				console.log(data);
+				console.log(status);
+				console.log(headers);
+				console.log(config);	
+			});
 		
-		$scope.add = function(profanity) {
+		$scope.addList = function(wordList) {
 			
-			if (angular.equals({}, profanity)) {
+			
+			if (angular.equals({}, wordList)) {
 				return false;
 			}
 			
-			$http.post("/filtr/api/profanity/", profanity)
+			wordList.profanities = [];
+			
+			$http({"method": "POST", "url": "/filtr/api/word_list/", "data": wordList, "headers": {"Content-Type": "application/json", "Accept": "application/json"}})
 			.success(function(data, status, headers, config) {
-				$scope.profanities.push(data);
-				$scope.newProfanity = {};
+				$scope.wordLists.push(data);
+				$scope.newList = {};
 			})
 			.error(function(data, status, headers, config) {
 				console.log(data);
@@ -35,6 +59,24 @@
 			
 		};
 		
+		$scope.addProfanity = function(profanity) {
+			
+			if (angular.equals({}, profanity)) {
+				return false;
+			}
+			
+			$http.post("/filtr/api/profanity/", profanity)
+			.success(function(data, status, headers, config) {
+				$scope.allProfanities.push(data);
+				$scope.newProfanity = {};
+			})
+			.error(function(data, status, headers, config) {
+				console.log(data);
+				console.log(status);
+				console.log(headers);
+				console.log(config);	
+			});
+		};
 		
 		$scope.delete = function(profanity) {
 			

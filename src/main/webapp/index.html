@@ -18,16 +18,36 @@
 		</div>
 	</nav>
 	<div class="container">
-		<div ng-controller="ProfanityController">
-		<h2>Profanities</h2>
+		<div ng-controller="AppController">
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-4">
+				<h2>Word Lists</h2>
 					<ul class="list-group">
 						<li class="list-group-item"
-							ng-repeat="profanity in profanities | orderBy:'id'">{{profanity.name}}<button ng-click="delete(profanity)" class="btn glyphicon glyphicon-remove"></button></li>
+							ng-repeat="wordList in wordLists | orderBy:'id'"><a>{{wordList.name}}</a></li>
 						<li class="list-group-item">
 							<form role="form">
-								<button ng-click="add(newProfanity)" class="btn glyphicon glyphicon-plus"></button>
+								<button ng-click="addList(newList)" class="btn glyphicon glyphicon-plus"></button>
+							    <input ng-model="newList.name" type="text" class="form-control no-border" placeholder="New Word List">
+							</form>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+				<h2>Profanities</h2>
+					<ul class="list-group">
+						<li class="list-group-item"
+							ng-repeat="profanity in wordLists[activeList].profanities | orderBy:'id'">{{profanity.name}}<button ng-click="delete(profanity)" class="btn glyphicon glyphicon-remove"></button></li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+				<h2>Add Profanities</h2>
+					<ul class="list-group">
+						<li class="list-group-item"
+							ng-repeat="profanity in allProfanities | orderBy:'id'">{{profanity.name}}<button ng-click="delete(profanity)" class="btn glyphicon glyphicon-remove"></button></li>
+						<li class="list-group-item">
+							<form role="form">
+								<button ng-click="addProfanity(newProfanity)" class="btn glyphicon glyphicon-plus"></button>
 							    <input ng-model="newProfanity.name" type="text" class="form-control no-border" placeholder="New Profanity">
 							</form>
 						</li>

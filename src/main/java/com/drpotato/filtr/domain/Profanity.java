@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 @Entity
 @Table(name = "profanity")
 public class Profanity implements Serializable {
@@ -28,6 +30,7 @@ public class Profanity implements Serializable {
 	@Column(name = "name")
 	private String name;
 
+	@JsonBackReference
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "profanities")
 	private Set<WordList> wordLists = new HashSet<WordList>();
 

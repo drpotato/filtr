@@ -19,7 +19,7 @@
 	     that is used by the The DisplatcherServlet is initialised by the XML file specified by
 	     the "contextConfiguration" initialisation parameter (i.e. "restful-context.xml"). -->
 	<servlet>
-		<servlet-name>profanityService</servlet-name>
+		<servlet-name>apiService</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -35,7 +35,7 @@
 	     requests of the form: http://localhost:8080/Contact/, 
 	     e.g http://localhost:8080/Contact/contacts.   -->
 	<servlet-mapping>
-		<servlet-name>profanityService</servlet-name>
+		<servlet-name>apiService</servlet-name>
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
 	
