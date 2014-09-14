@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +34,7 @@ public class Profanity implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "profanities")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "profanities", cascade = { CascadeType.REMOVE })
 	private Set<WordList> wordLists = new HashSet<WordList>();
 
 	public Profanity() {
