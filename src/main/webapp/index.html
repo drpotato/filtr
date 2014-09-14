@@ -13,7 +13,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Filtr</a>
+				<a class="navbar-brand">Filtr</a>
 			</div>
 		</div>
 	</nav>
@@ -24,7 +24,7 @@
 				<h2>Word Lists</h2>
 					<ul class="list-group">
 						<li class="list-group-item"
-							ng-repeat="wordList in wordLists | orderBy:'id'"><a>{{wordList.name}}</a></li>
+							ng-repeat="wordList in wordLists"><a ng-click="changeActiveList(wordList)">{{wordList.name}}</a></li>
 						<li class="list-group-item">
 							<form role="form">
 								<button ng-click="addList(newList)" class="btn glyphicon glyphicon-plus"></button>
@@ -37,14 +37,14 @@
 				<h2>Profanities</h2>
 					<ul class="list-group">
 						<li class="list-group-item"
-							ng-repeat="profanity in wordLists[activeList].profanities | orderBy:'id'">{{profanity.name}}<button ng-click="delete(profanity)" class="btn glyphicon glyphicon-remove"></button></li>
+							ng-repeat="profanity in activeList.profanities">{{profanity.name}}<button ng-click="removeFromList(profanity)" class="btn glyphicon glyphicon-remove"></button></li>
 					</ul>
 				</div>
 				<div class="col-md-4">
 				<h2>Add Profanities</h2>
 					<ul class="list-group">
 						<li class="list-group-item"
-							ng-repeat="profanity in allProfanities | orderBy:'id'">{{profanity.name}}<button ng-click="delete(profanity)" class="btn glyphicon glyphicon-remove"></button></li>
+							ng-repeat="profanity in allProfanities">{{profanity.name}}<button ng-click="delete(profanity)" class="btn glyphicon glyphicon-remove"></button></li>
 						<li class="list-group-item">
 							<form role="form">
 								<button ng-click="addProfanity(newProfanity)" class="btn glyphicon glyphicon-plus"></button>

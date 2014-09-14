@@ -4,6 +4,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "profanity")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "_")
 public class Profanity implements Serializable {
 
 	private static final long serialVersionUID = -4659364195861965720L;
@@ -60,7 +61,7 @@ public class Profanity implements Serializable {
 	}
 
 	public Set<WordList> getWordLists() {
-		return wordLists;
+		return new HashSet<WordList>();
 	}
 
 	public void setWordLists(Set<WordList> wordLists) {
@@ -68,10 +69,20 @@ public class Profanity implements Serializable {
 	}
 
 	public void addWordList(WordList wordList) {
-		getWordLists().add(wordList);
+		wordLists.add(wordList);
 	}
 
-	public void deleteWordList(WordList wordList) {
-		getWordLists().remove(wordList);
+	public void removeWordList(WordList wordList) {
+		for (Iterator<WordList> i = wordLists.iterator(); i.hasNext();) {
+			WordList element = i.next();
+			if (element.getId() == wordList.getId()) {
+				i.remove();
+			}
+		}
 	}
+
+	public String toString() {
+		return String.format("Profanity(id =  %s, name =  %s)", id, name);
+	}
+
 }

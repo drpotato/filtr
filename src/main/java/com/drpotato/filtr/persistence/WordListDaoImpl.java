@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.drpotato.filtr.domain.Profanity;
 import com.drpotato.filtr.domain.WordList;
 
 @Transactional
@@ -36,8 +37,8 @@ public class WordListDaoImpl implements WordListDao {
 		// TODO Auto-generated method stub
 		return (WordList) sessionFactory
 				.getCurrentSession()
-				.createQuery("SELECT DISTINCT p FROM WordList w WHERE w.id=:id")
-				.uniqueResult();
+				.createQuery("SELECT DISTINCT w FROM WordList w WHERE w.id=:id")
+				.setParameter("id", id).uniqueResult();
 	}
 
 	@Override
@@ -50,5 +51,4 @@ public class WordListDaoImpl implements WordListDao {
 	public void delete(WordList wordList) {
 		sessionFactory.getCurrentSession().delete(wordList);
 	}
-
 }

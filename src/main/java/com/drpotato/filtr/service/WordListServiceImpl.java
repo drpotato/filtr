@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.drpotato.filtr.domain.Profanity;
 import com.drpotato.filtr.domain.WordList;
 import com.drpotato.filtr.persistence.WordListDao;
 

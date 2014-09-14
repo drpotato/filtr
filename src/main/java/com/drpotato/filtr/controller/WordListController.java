@@ -2,6 +2,8 @@ package com.drpotato.filtr.controller;
 
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,11 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.drpotato.filtr.domain.Profanity;
 import com.drpotato.filtr.domain.WordList;
+import com.drpotato.filtr.service.ProfanityService;
 import com.drpotato.filtr.service.WordListService;
 
 @Controller
 @RequestMapping(value = "/word_list")
 public class WordListController {
+
+	private Logger logger = LoggerFactory.getLogger(WordListController.class);
 
 	@Autowired
 	private WordListService wordListService;
@@ -41,7 +46,7 @@ public class WordListController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
 	public WordList update(@RequestBody WordList wordList) {
 		WordList newWordList = wordListService.save(wordList);
 		return newWordList;
@@ -55,11 +60,30 @@ public class WordListController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/add_profanity/{id}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public WordList addWordList(@RequestBody Profanity profanity,
+	@RequestMapping(value = "/add_profanity/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+	public WordList addProfanity(@RequestBody Profanity profanity,
 			@PathVariable Integer id) {
 		WordList wordList = wordListService.findById(id);
 		wordList.addProfanity(profanity);
+		wordListService.save(wordList);
+		return wordList;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/remove_profanity/{id}", method = RequestMethod.DELETE, consumes = "application/json", produces = "application/json")
+	public WordList removeProfanity(@RequestBody Profanity profanity,
+			@PathVariable Integer id) {
+
+		WordList wordList = wordListService.findById(id);
+
+		System.out.println(profanity.toString());
+
+		System.out.println(wordList.toString());
+
+		wordList.removeProfanity(profanity);
+
+		System.out.println(wordList.toString());
+
 		wordListService.save(wordList);
 		return wordList;
 	}

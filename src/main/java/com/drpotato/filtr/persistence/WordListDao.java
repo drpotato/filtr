@@ -2,6 +2,7 @@ package com.drpotato.filtr.persistence;
 
 import java.util.Set;
 
+import com.drpotato.filtr.domain.Profanity;
 import com.drpotato.filtr.domain.WordList;
 
 public interface WordListDao {
@@ -17,4 +18,5 @@ public interface WordListDao {
 
 	// Delete a word list
 	public void delete(WordList wordList);
+
 }

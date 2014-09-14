@@ -4,6 +4,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -17,13 +18,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "word_list")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "_")
 public class WordList implements Serializable {
+
+	private static final long serialVersionUID = 8165529717421708886L;
 
 	@Id
 	@Column(name = "id")
@@ -45,7 +47,7 @@ public class WordList implements Serializable {
 	}
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(Integer id) {
@@ -53,7 +55,7 @@ public class WordList implements Serializable {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
@@ -61,25 +63,45 @@ public class WordList implements Serializable {
 	}
 
 	public Set<Profanity> getProfanities() {
-		return this.profanities;
+		return profanities;
 	}
 
 	public void setProfanities(Set<Profanity> profanities) {
-
-		for (Profanity profanity : profanities) {
-			profanity.addWordList(this);
-		}
 
 		this.profanities = profanities;
 	}
 
 	public void addProfanity(Profanity profanity) {
-		profanity.addWordList(this);
-		getProfanities().add(profanity);
+		profanities.add(profanity);
 	}
 
-	public void deleteProfanity(Profanity profanity) {
-		profanity.deleteWordList(this);
-		getProfanities().remove(profanity);
+	public void removeProfanity(Profanity profanity) {
+
+		for (Iterator<Profanity> i = profanities.iterator(); i.hasNext();) {
+			Profanity element = i.next();
+			if (element.getId() == profanity.getId()) {
+				i.remove();
+			}
+		}
+
+		profanities.remove(profanity);
+	}
+
+	public String toString() {
+
+		StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("[");
+
+		for (Profanity profanity : profanities) {
+			stringBuilder.append(profanity);
+			stringBuilder.append(",");
+		}
+
+		stringBuilder.append("]");
+
+		return String.format(
+				"WordList(id =  %s, name =  %s, profanities = %s)", id, name,
+				stringBuilder.toString());
 	}
 }

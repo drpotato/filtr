@@ -2,6 +2,7 @@ package com.drpotato.filtr.service;
 
 import java.util.Set;
 
+import com.drpotato.filtr.domain.Profanity;
 import com.drpotato.filtr.domain.WordList;
 
 public interface WordListService {
