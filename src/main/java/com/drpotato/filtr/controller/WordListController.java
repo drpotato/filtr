@@ -1,5 +1,8 @@
 package com.drpotato.filtr.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -97,5 +100,26 @@ public class WordListController {
 
 		wordListService.save(wordList);
 		return wordList;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/check_profanities/{id}/{text}", method = RequestMethod.GET, produces = "application/json")
+	public boolean checkProfanities(@PathVariable Integer id,
+			@PathVariable String text) {
+
+		WordList wordList = wordListService.findById(id);
+
+		List<String> textList = new ArrayList<String>(Arrays.asList(text
+				.split(" ")));
+
+		for (String word : textList) {
+			for (Profanity profanity : wordList.getProfanities()) {
+				if (word.equalsIgnoreCase(profanity.getName())) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 }

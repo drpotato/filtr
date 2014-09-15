@@ -27,8 +27,12 @@
 		$scope.excludedProfanities = [];
 		$scope.wordLists = [];
 		
+		$scope.alerts = [];
+		
 		$scope.newProfanity = {};
 		$scope.newList = {};
+		
+		$scope.testText = "";
 		
 		$http.get("/filtr/api/word_list/")
 		.success(function(data, status, headers, config) {
@@ -157,7 +161,7 @@
 			});
 		};
 		
-		$scope.delete = function(profanity) {
+		$scope.deleteProfanity = function(profanity) {
 			
 			$http({"method": "DELETE", "url": "/filtr/api/profanity/", "data": profanity, "headers": {"Content-Type": "application/json", "Accept": "application/json"}})
 			.success(function(data, status, headers, config) {
@@ -175,6 +179,38 @@
 			
 			
 		};
+		
+		$scope.checkProfanity = function(text) {
+			
+			$http({"method": "GET", "url": "/filtr/api/word_list/check_profanities/" + $scope.activeList.id + "/" + text, "headers": {"Accept": "application/json"}})
+			.success(function(data, status, headers, config) {
+				
+				console.log(data);
+				
+				if (data === 'true') {
+					$scope.alerts.push({
+						'type': 'success',
+						'message': 'No profanities found!'
+					});
+				} else {
+					$scope.alerts.push({
+						'type': 'danger',
+						'message': 'Profanities found!'
+					});
+				}
+			})
+			.error(function(data, status, headers, config) {
+				console.log(data);
+				console.log(status);
+				console.log(headers);
+				console.log(config);
+			});
+		};
+		
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
+		
 	});
 	
 })();

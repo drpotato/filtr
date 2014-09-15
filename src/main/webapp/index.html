@@ -5,8 +5,8 @@
 <link rel="icon" href="/filtr/img/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="/filtr/css/bootstrap.css" />
 <link rel="stylesheet" href="/filtr/css/style.css" />
-<script src="/filtr/js/angular.js"></script>
-<script src="/filtr/js/ui-bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
 <script src="/filtr/js/app.js"></script>
 <title>Filtr</title>
 </head>
@@ -20,6 +20,16 @@
 	</nav>
 	<div class="container">
 		<div ng-controller="AppController">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Check Text</h2>
+					<form role="form">
+					<input ng-model="testText" type="text">
+					<button ng-click="checkProfanity(testText)" class="btn float-right">Check</button>
+					</form>
+					<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.message}}</alert>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-4">
 				<h2>Word Lists</h2>
@@ -45,7 +55,7 @@
 				<h2>Add Profanities</h2>
 					<ul class="list-group">
 						<li class="list-group-item clearfix"
-							ng-repeat="profanity in excludedProfanities"><a ng-click="addToList(profanity)">{{profanity.name}}</a><button ng-click="delete(profanity)" class="btn float-right glyphicon glyphicon-remove"></button></li>
+							ng-repeat="profanity in excludedProfanities"><a ng-click="addToList(profanity)">{{profanity.name}}</a><button ng-click="deleteProfanity(profanity)" class="btn float-right glyphicon glyphicon-remove"></button></li>
 						<li class="list-group-item clearfix">
 							<form role="form">
 							    <input ng-model="newProfanity.name" type="text" class="form-control float-left no-border" placeholder="New Profanity">
