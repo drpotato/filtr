@@ -27,8 +27,7 @@ public class WordListServiceImpl implements WordListService {
 
 	@Override
 	public WordList save(WordList wordList) {
-		wordListDao.save(wordList);
-		return wordList;
+		return wordListDao.save(wordList);
 	}
 
 	@Override

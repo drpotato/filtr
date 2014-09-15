@@ -26,8 +26,7 @@ public class ProfanityServiceImpl implements ProfanityService {
 
 	@Override
 	public Profanity save(Profanity profanity) {
-		profanityDao.save(profanity);
-		return profanity;
+		return profanityDao.save(profanity);
 	}
 
 	@Override
