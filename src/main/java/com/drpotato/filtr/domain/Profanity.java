@@ -3,9 +3,11 @@ package com.drpotato.filtr.domain;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -22,7 +25,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "profanity")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "_")
-public class Profanity implements Serializable {
+public class Profanity implements Serializable, Comparable<Profanity> {
 
 	private static final long serialVersionUID = -4659364195861965720L;
 
@@ -34,8 +37,22 @@ public class Profanity implements Serializable {
 	@Column(name = "name")
 	private String name;
 
+	@Transient
+	public static Comparator<Profanity> comparator = new Comparator<Profanity>() {
+
+		@Override
+		public int compare(Profanity a, Profanity b) {
+			if (a.getId() < b.getId()) {
+				return -1;
+			} else {
+				return 1;
+			}
+		}
+
+	};
+
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "profanities", cascade = { CascadeType.REMOVE })
-	private Set<WordList> wordLists = new HashSet<WordList>();
+	private Set<WordList> wordLists = new TreeSet<WordList>(WordList.comparator);
 
 	public Profanity() {
 
@@ -84,6 +101,16 @@ public class Profanity implements Serializable {
 
 	public String toString() {
 		return String.format("Profanity(id =  %s, name =  %s)", id, name);
+	}
+
+	@Override
+	public int compareTo(Profanity o) {
+		// TODO Auto-generated method stub
+		if (this.id < o.getId()) {
+			return -1;
+		} else {
+			return 1;
+		}
 	}
 
 }

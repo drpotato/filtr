@@ -1,7 +1,7 @@
 package com.drpotato.filtr.persistence;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 
@@ -19,7 +19,7 @@ public class ProfanityDaoImpl implements ProfanityDao {
 	private SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
-		sessionFactory = sessionFactory;
+		this.sessionFactory = sessionFactory;
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class ProfanityDaoImpl implements ProfanityDao {
 	@Transactional(readOnly = true)
 	public Set<Profanity> findAll() {
 
-		return new HashSet<Profanity>(sessionFactory.getCurrentSession()
+		return new TreeSet<Profanity>(sessionFactory.getCurrentSession()
 				.createQuery("FROM Profanity p").list());
 	}
 

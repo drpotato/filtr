@@ -1,7 +1,7 @@
 package com.drpotato.filtr.persistence;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 
@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.drpotato.filtr.domain.Profanity;
 import com.drpotato.filtr.domain.WordList;
 
 @Transactional
@@ -20,7 +19,7 @@ public class WordListDaoImpl implements WordListDao {
 	private SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
-		sessionFactory = sessionFactory;
+		this.sessionFactory = sessionFactory;
 	}
 
 	@Override
@@ -28,7 +27,7 @@ public class WordListDaoImpl implements WordListDao {
 	@Transactional(readOnly = true)
 	public Set<WordList> findAll() {
 		// TODO Auto-generated method stub
-		return new HashSet<WordList>(sessionFactory.getCurrentSession()
+		return new TreeSet<WordList>(sessionFactory.getCurrentSession()
 				.createQuery("FROM WordList w").list());
 	}
 
