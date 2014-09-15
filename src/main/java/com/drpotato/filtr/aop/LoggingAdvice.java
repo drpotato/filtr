@@ -16,20 +16,25 @@ public class LoggingAdvice implements MethodInterceptor {
 
 		Object[] arguments = methodInvocation.getArguments();
 
-		StringBuilder stringBuilder = new StringBuilder();
+		StringBuilder stringBuilder = new StringBuilder("[");
 
-		for (Object argument : arguments) {
-			stringBuilder.append(argument.toString());
+		for (int i = 0; i < arguments.length - 1; i++) {
+			stringBuilder.append(arguments[i].toString());
+			stringBuilder.append(", ");
 		}
+		if (arguments.length > 0) {
+			stringBuilder.append(arguments[arguments.length - 1].toString());
+		}
+		stringBuilder.append("]");
 
-		logger.info(String.format("Executing: %s on Class: %s",
+		logger.info(String.format("Executing method '%s' on class '%s'",
 				methodInvocation.getMethod().getName().toString(),
 				methodInvocation.getThis().getClass().getSimpleName()));
 		logger.info(String.format("Arguments: %s", stringBuilder.toString()));
 		Object result = methodInvocation.proceed();
-		logger.info(String.format("Finished: %s on Class: %s", methodInvocation
-				.getMethod().getName().toString(), methodInvocation.getThis()
-				.getClass().getSimpleName()));
+		logger.info(String.format("Finished method '%s' on class '%s'",
+				methodInvocation.getMethod().getName().toString(),
+				methodInvocation.getThis().getClass().getSimpleName()));
 		return result;
 	}
 }

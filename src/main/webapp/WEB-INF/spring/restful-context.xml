@@ -13,10 +13,6 @@
 
 	<context:component-scan
 		base-package="com.drpotato.filtr.controller, com.drpotato.filtr.service" />
-
-	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
-		<property name="mappingLocation" value="classpath:oxm-mapping.xml" />
-	</bean>
 	
 	<jdbc:embedded-database id="dataSource" type="H2">
         <jdbc:script location="/WEB-INF/spring/schema.sql"/>

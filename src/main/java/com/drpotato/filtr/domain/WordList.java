@@ -113,7 +113,12 @@ public class WordList implements Serializable, Comparable<WordList> {
 
 		for (Profanity profanity : profanities) {
 			stringBuilder.append(profanity);
-			stringBuilder.append(",");
+			stringBuilder.append(", ");
+		}
+
+		if (stringBuilder.length() > 3) {
+			stringBuilder.delete(stringBuilder.length() - 2,
+					stringBuilder.length());
 		}
 
 		stringBuilder.append("]");
