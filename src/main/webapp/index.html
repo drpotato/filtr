@@ -24,12 +24,12 @@
 				<div class="col-md-4">
 				<h2>Word Lists</h2>
 					<ul class="list-group">
-						<li class="list-group-item"
+						<li class="list-group-item clearfix"
 							ng-repeat="wordList in wordLists"><a ng-click="changeActiveList(wordList)">{{wordList.name}}</a></li>
-						<li class="list-group-item">
+						<li class="list-group-item clearfix">
 							<form role="form">
-								<button ng-click="addList(newList)" class="btn glyphicon glyphicon-plus"></button>
-							    <input ng-model="newList.name" type="text" class="form-control no-border" placeholder="New Word List">
+							    <input ng-model="newList.name" type="text" class="float-left form-control no-border" placeholder="New Word List">
+							    <button ng-click="addList(newList)" class="btn float-right glyphicon glyphicon-plus"></button>
 							</form>
 						</li>
 					</ul>
@@ -37,19 +37,19 @@
 				<div class="col-md-4">
 				<h2>Profanities</h2>
 					<ul class="list-group">
-						<li class="list-group-item"
-							ng-repeat="profanity in activeList.profanities">{{profanity.name}}<button ng-click="removeFromList(profanity)" class="btn glyphicon glyphicon-remove"></button></li>
+						<li class="list-group-item  clearfix"
+							ng-repeat="profanity in activeList.profanities">{{profanity.name}}<button ng-click="removeFromList(profanity)" class="btn float-right glyphicon glyphicon-remove"></button></li>
 					</ul>
 				</div>
 				<div class="col-md-4">
 				<h2>Add Profanities</h2>
 					<ul class="list-group">
-						<li class="list-group-item"
-							ng-repeat="profanity in excludedProfanities"><a ng-click="addToList(profanity)">{{profanity.name}}</a><button ng-click="delete(profanity)" class="btn glyphicon glyphicon-remove"></button></li>
-						<li class="list-group-item">
+						<li class="list-group-item clearfix"
+							ng-repeat="profanity in excludedProfanities"><a ng-click="addToList(profanity)">{{profanity.name}}</a><button ng-click="delete(profanity)" class="btn float-right glyphicon glyphicon-remove"></button></li>
+						<li class="list-group-item clearfix">
 							<form role="form">
-								<button ng-click="addProfanity(newProfanity)" class="btn glyphicon glyphicon-plus"></button>
-							    <input ng-model="newProfanity.name" type="text" class="form-control no-border" placeholder="New Profanity">
+							    <input ng-model="newProfanity.name" type="text" class="form-control float-left no-border" placeholder="New Profanity">
+							    <button ng-click="addProfanity(newProfanity)" class="btn float-right glyphicon glyphicon-plus"></button>
 							</form>
 						</li>
 					</ul>

@@ -7,4 +7,20 @@ body {
 	box-shadow: none;
 }
 
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+input {
+	width: 80%!important;
+}
+
+.btn {
+	padding: 1px 3px;
+}
+
 .nav, .pagination, .carousel, .panel-title, a { cursor: pointer; }
